@@ -26,16 +26,6 @@ public interface IFluidTank {
     int getCapacity();
 
     /**
-     * Returns a wrapper object {@link FluidTankInfo } containing the capacity of the tank and the
-     * FluidStack it holds.
-     *
-     * Should prevent manipulation of the IFluidTank. See {@link FluidTank}.
-     *
-     * @return State information for the IFluidTank.
-     */
-    FluidTankInfo getInfo();
-
-    /**
      * @param resource FluidStack attempting to fill the tank.
      * @param action   If {@link ActionType#SIMULATE}, the fill will only be simulated.
      * @return Amount of fluid that was accepted by the tank.

@@ -33,10 +33,6 @@ public class FluidTank implements IFluidTank {
         return capacity;
     }
 
-    public FluidTankInfo getInfo() {
-        return new FluidTankInfo(fluid, capacity);
-    }
-
     public FluidStack fill(FluidStack fillFluid, ActionType action) {
         if (fillFluid.isEmpty()) return FluidStack.EMPTY;
         if (action == ActionType.SIMULATE) {
@@ -65,10 +61,10 @@ public class FluidTank implements IFluidTank {
     }
 
     public FluidStack drain(int drainMax, ActionType action) {
-        return drainFluid(new FluidStack(fluid.getFluid(), drainMax), action);
+        return drain(new FluidStack(fluid.getFluid(), drainMax), action);
     }
 
-    public FluidStack drainFluid(FluidStack drain, ActionType action) {
+    public FluidStack drain(FluidStack drain, ActionType action) {
         if (!fluid.isFluidStackable(drain)) {
             return FluidStack.EMPTY;
         }

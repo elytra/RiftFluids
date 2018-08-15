@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class FluidStack {
-    public static final FluidStack EMPTY = new FluidStack((Fluid)null);
+    public static final FluidStack EMPTY = new FluidStack(Fluid.REGISTRY.getObject(new ResourceLocation("empty")));
     private Fluid fluid;
     private int amount;
     private NBTTagCompound tag;
