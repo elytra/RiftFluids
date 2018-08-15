@@ -105,8 +105,8 @@ public class FluidStack {
     }
 
     public boolean isFluidStackable(FluidStack compare) {
-        if (isEmpty || compare.isEmpty()) return true;
-        else return isFluidNBTMatch(compare);
+        if (this.isEmpty() || compare.isEmpty()) return true;
+        else return (isFluidMatch(compare) && isFluidNBTMatch(compare));
     }
 
     public boolean isFluidIdentical(FluidStack compare) {

@@ -2,7 +2,6 @@ package com.elytradev.riftfluids;
 
 import com.elytradev.riftfluids.FluidImpl.FluidStack;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,7 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.fluid.Fluid;
+import org.dimdev.rift.injectedmethods.RiftFluid;
 import org.lwjgl.opengl.GL11;
 
 public class TankRenderer extends TileEntityRenderer<TileEntityTank> {
@@ -24,7 +23,8 @@ public class TankRenderer extends TileEntityRenderer<TileEntityTank> {
         GlStateManager.enableRescaleNormal();
         GlStateManager.translate(x, y, z);
         if (!fluid.isEmpty()) {
-            TextureAtlasSprite tas = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(Fluid.REGISTRY.getNameForObject(te.getTank().getFluid().getFluid()).toString());
+            RiftFluid fluidType = (RiftFluid)fluid.getFluid();
+            TextureAtlasSprite tas = fluidType.getStillTexture();
             bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
