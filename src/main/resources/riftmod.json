@@ -1,0 +1,10 @@
+{
+  "id": "riftfluids",
+  "name": "Rift Fluids",
+  "authors": [
+    "b0undarybreaker"
+  ],
+  "listeners": [
+    "com.elytradev.riftfluids.RiftFluids"
+  ]
+}

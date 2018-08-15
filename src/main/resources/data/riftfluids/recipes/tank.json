@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "ggg",
+    "g g",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "riftfluids:tank",
+    "count": 6
+  }
+}
