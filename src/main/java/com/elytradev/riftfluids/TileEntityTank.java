@@ -4,6 +4,9 @@ import com.elytradev.riftfluids.FluidImpl.ActionType;
 import com.elytradev.riftfluids.FluidImpl.FluidStack;
 import com.elytradev.riftfluids.FluidImpl.FluidTank;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -41,4 +44,34 @@ public class TileEntityTank extends TileEntity {
         }
         return false;
     }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        NBTTagCompound tag = super.writeToNBT(compound);
+        tag.setTag("Tank", tank.writeToNBT(new NBTTagCompound()));
+        return tag;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        tank.readFromNBT(compound.getCompoundTag("Tank"));
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+    }
+
 }

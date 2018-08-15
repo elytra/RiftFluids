@@ -22,8 +22,8 @@ public class RiftFluids implements BlockAdder, ItemAdder, TileEntityTypeAdder, T
 
     public static final BlockFluidTank TANK = new BlockFluidTank(Block.Builder.create(Material.GLASS, MapColor.AIR).hardnessAndResistance(2f, 3f).soundType(SoundType.GLASS));
 
-    public static final TileEntityType<TileEntityTank> TANK_TE = TileEntityType.registerTileEntityType("riftfluids:tank", TileEntityType.Builder.create(TileEntityTank::new));
-    
+    public static TileEntityType<TileEntityTank> TANK_TE;
+
     @Override
     public void registerBlocks() {
         Block.registerBlock(new ResourceLocation("riftfluids:tank"), TANK);
@@ -36,7 +36,7 @@ public class RiftFluids implements BlockAdder, ItemAdder, TileEntityTypeAdder, T
 
     @Override
     public void registerTileEntityTypes() {
-        TANK_TE.createTileEntity();
+        TANK_TE = TileEntityType.registerTileEntityType("riftfluids:tank", TileEntityType.Builder.create(TileEntityTank::new));
     }
 
     @Override

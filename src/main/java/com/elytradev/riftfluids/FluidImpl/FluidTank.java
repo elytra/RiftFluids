@@ -1,6 +1,7 @@
 package com.elytradev.riftfluids.FluidImpl;
 
 import net.minecraft.fluid.Fluid;
+import net.minecraft.nbt.NBTTagCompound;
 
 
 public class FluidTank implements IFluidTank {
@@ -88,6 +89,30 @@ public class FluidTank implements IFluidTank {
 
     }
 
+    public void setFluid(FluidStack fluid) {
+        this.fluid = fluid;
+    }
+
+    public FluidTank readFromNBT(NBTTagCompound nbt) {
+        if (!nbt.hasKey("Empty")) {
+            FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt);
+            setFluid(fluid);
+        }
+        else {
+            setFluid(FluidStack.EMPTY);
+        }
+        return this;
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        if (fluid != null) {
+            fluid.writeToNBT(nbt);
+        }
+        else {
+            nbt.setString("Empty", "");
+        }
+        return nbt;
+    }
 
     public void onContentsChanged() {
 

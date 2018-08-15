@@ -1,5 +1,5 @@
 {
     "variants": {
-        "default": { "model": "riftfluids:block/tank" }
+        "": { "model": "riftfluids:block/tank" }
     }
 }

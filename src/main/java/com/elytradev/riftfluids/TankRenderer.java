@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.fluid.Fluid;
 import org.lwjgl.opengl.GL11;
 
 public class TankRenderer extends TileEntityRenderer<TileEntityTank> {
@@ -22,14 +23,14 @@ public class TankRenderer extends TileEntityRenderer<TileEntityTank> {
         GlStateManager.pushMatrix();
         GlStateManager.enableRescaleNormal();
         GlStateManager.translate(x, y, z);
-        if (fluid != null) {
-            TextureAtlasSprite tas = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFluid().toString());
+        if (!fluid.isEmpty()) {
+            TextureAtlasSprite tas = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(Fluid.REGISTRY.getNameForObject(te.getTank().getFluid().getFluid()).toString());
             bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.enableTexture2D();
             GlStateManager.color(1, 1, 1);
-            renderCube(2.25f, 0, 2.25f, 11.5f, 11.5f * (fluid.getAmount() / (float) te.getTank().getCapacity()), 15.5f, tas, true, true, true);
+            renderCube(2.25f, 0, 2.25f, 11.5f, 15.5f * (fluid.getAmount() / (float) te.getTank().getCapacity()), 11.5f, tas, true, true, true);
             GlStateManager.disableBlend();
         }
 
